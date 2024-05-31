@@ -27,7 +27,7 @@ def login(username: str, password: str):
         update_count_query = '''UPDATE users SET login_try_count = login_try_count + 1 WHERE username = %s;'''
         cur.execute(update_count_query, (_user.username,))
         conn.commit()
-        if _user.login_try_count > 2:
+        if _user.login_try_count > 3:
             update_status_query = """update users set status = 'blocked' where username = %s"""
             cur.execute(update_status_query, (username,))
             conn.commit()
